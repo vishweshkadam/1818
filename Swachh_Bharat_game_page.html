@@ -1,0 +1,416 @@
+<html>
+
+<head>
+	<title>Swachh Bharat</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.hide {
+			display: none;
+		}
+
+		.vanish {
+
+
+			position: absolute;
+			left: 1300;
+
+			bottom: 30px;
+		}
+
+		.boy {
+			width: 150px;
+			height: 110px;
+			background-image: url('boy with broom.png');
+			position: absolute;
+			left: 50px;
+			bottom: 120px;
+		}
+		.rock_1 {
+			width: 100px;
+			height: 50px;
+			background-image: url("rock.png");
+			position: fixed;
+			left: 100px;
+			bottom: 120px;
+
+		}
+
+		
+
+		.rock_2 {
+			width: 100px;
+			height: 50px;
+			background-image: url("rock.png");
+			position: fixed;
+			left: 500px;
+			bottom: 120px;
+		}
+
+		
+		
+		.rock_3 {
+			width: 100px;
+			height: 50px;
+			background-image: url("rock.png");
+			position: fixed;
+			left: 800px;
+			bottom: 120px;
+
+		}
+
+		.body {
+			background-image: url("grasscutter2.png");
+
+			background-size: contain;
+		}
+
+		.garbag_1 {
+			width: 150px;
+			height: 100px;
+			background-image: url("apply.png");
+			position: fixed;
+			left: 900px;
+			bottom: 120px;
+
+		}
+
+		.garbag_2 {
+			width: 150px;
+			height: 50px;
+			background-image: url("raper.png");
+			position: fixed;
+			left: 600px;
+			bottom: 120px;
+
+		}
+
+		.garbag_3 {
+			width: 111px;
+			height: 100px;
+			background-image: url("bannana.png");
+			position: fixed;
+			left: 200px;
+			bottom: 120px;
+
+		}
+
+		.garbag_4 {
+			width: 151px;
+			height: 100px;
+			background-image: url("bottol.png");
+			position: fixed;
+			left: 300px;
+			bottom: 550px;
+
+		}
+
+		.garbag_5 {
+			width: 100px;
+			height: 100px;
+			background-image: url("cold drink glass.png");
+			position: fixed;
+			left: 500px;
+			bottom: 25%;
+
+
+		}
+
+		.garbag_6 {
+			width: 90px;
+			height: 65px;
+			background-image: url("glass.png");
+			position: fixed;
+			left: 500px;
+			bottom: 25%;
+
+
+		}
+
+
+		.score {
+			position: absolute;
+			top: 15px;
+			left: 40px;
+			background-color: #10ac84;
+			width: 300px;
+			line-height: 70px;
+			text-align: center;
+			color: white;
+			font-size: 1.5em;
+			font-family: fantasy;
+			box-shadow: 0 5px 5px #777;
+
+		}
+	</style>
+</head>
+
+<body class="body">
+
+	<div class="carGame">
+		<div class="score"></div>
+		<div class="startscreen">
+			<p>Press here to start
+				<br>
+				use arrow keys to move
+				<br>
+				if you hit the rock you will lose.
+			</p>
+		</div>
+		<div class="gameArea hide">
+			
+		</div>
+	</div>
+	<script>
+		const score = document.querySelector('.score')
+		const startscreen = document.querySelector('.startscreen')
+		const gameArea = document.querySelector('.gameArea ')
+
+		console.log(gameArea);
+		startscreen.addEventListener('click', start);
+		let player = {
+			speed: 4,
+			score: 0
+		};
+
+		let keys = {
+			ArrowUp: false,
+			ArrowDown: false,
+			ArrowRight: false,
+			ArrowLeft: false
+		}
+
+		document.addEventListener('keydown', keyDown)
+		document.addEventListener('keyup', keyUp);
+
+		function keyDown(e) {
+			e.preventDefault();
+			keys[e.key] = true;
+			//console.log(e.key);//
+			console.log(keys);
+		}
+
+		function keyUp(e) {
+			e.preventDefault();
+			keys[e.key] = false;
+			//console.log(e.key);//
+			console.log(keys);
+		}
+
+		function iscollide(a, b) {
+			aRect = a.getBoundingClientRect();
+			bRect = b.getBoundingClientRect();
+
+
+			return !((aRect.bottom < bRect.top) || (aRect.top > bRect.bottom) ||
+				(aRect.right < bRect.left) ||
+				(aRect.left > bRect.right)
+			)
+		}
+
+		function endGame() {
+			player.start = false;
+			
+		}
+
+		function moveRock_1(boy) {
+			let rock = document.querySelectorAll(".rock_1");
+
+			rock.forEach(function (item) {
+				if (iscollide(boy, item)) {
+					
+					endGame()
+				}
+
+				if (item.x >= 750) {
+					item.x >= -300;
+					item.style.left = Math.floor(Math.random() * 350) + 'px';
+				}
+				item.x += player.speed;
+				item.style.top = item.x + "px";
+			})
+
+		}
+
+		function moveRock_2(boy) {
+			let rock = document.querySelectorAll(".rock_2");
+
+			rock.forEach(function (item) {
+				if (iscollide(boy, item)) {
+					
+					endGame()
+				}
+
+				if (item.x >= 750) {
+					item.x >= -300;
+					item.style.left = Math.floor(Math.random() * 350) + 'px';
+				}
+				item.x += player.speed;
+				item.style.top = item.x + "px";
+			})
+
+		}
+		function moveRock_3(boy) {
+			let rock = document.querySelectorAll(".rock_3");
+
+			rock.forEach(function (item) {
+				if (iscollide(boy, item)) {
+					
+					endGame()
+				}
+
+				if (item.x >= 750) {
+					item.x >= -300;
+					item.style.left = Math.floor(Math.random() * 350) + 'px';
+				}
+				item.x += player.speed;
+				item.style.top = item.x + "px";
+			})
+
+		}
+
+		
+			
+
+
+		function gamePlay() {
+			console.log("hey i am click.")
+			let boy = document.querySelector('.boy');
+
+			moveRock_1(boy)
+			moveRock_2(boy)
+			moveRock_3(boy)
+
+			if (player.start) {
+			
+
+				if (keys.ArrowUp && player.y > 381) {
+					player.y -= player.speed
+				};
+				if (keys.ArrowDown && player.y < 550) {
+					player.y += player.speed
+				};
+				if (keys.ArrowLeft && player.x > 0) {
+					player.x -= player.speed
+				};
+				if (keys.ArrowRight && player.x < 1200) {
+					player.x += player.speed
+				};
+
+				boy.style.top = player.y + "px";
+
+				boy.style.left = player.x + "px";
+
+				window.requestAnimationFrame(gamePlay);
+
+
+			}
+
+
+		}
+
+
+		function start() {
+			gameArea.classList.remove('hide');
+			startscreen.classList.add('hide');
+			window.requestAnimationFrame(gamePlay);
+			player.start = true;
+			player.score = 0;
+			let boy = document.createElement('div')
+			boy.setAttribute('class', 'boy')
+			//boy.innerText="hey i am ur boy";
+			gameArea.appendChild(boy);
+
+			player.x = boy.offsetLeft
+			player.y = boy.offsetTop
+			console.log("top position" + boy.offsetTop);
+			console.log("left position" + boy.offsetLeft);
+
+
+			for (x = 0; x < 1; x++) {
+				let rock = document.createElement('div');
+				rock.setAttribute('class', 'rock_1');
+				rock.y = (x * 300);
+				rock.style.bottom = rock.y + "px";
+
+
+				gameArea.appendChild(rock);
+			}
+			for (x = 0; x < 1; x++) {
+				let rock = document.createElement('div');
+				rock.setAttribute('class', 'rock_2');
+				rock.y = (x * 700);
+				rock.style.bottom = 100 + "px";
+
+
+				gameArea.appendChild(rock);
+			}
+			
+			for (x = 0; x < 1; x++) {
+				let rock = document.createElement('div');
+				rock.setAttribute('class', 'rock_3');
+				rock.y = (x * 600);
+				rock.style.bottom = 100 + "px";
+				gameArea.appendChild(rock);
+			}
+			for (x = 0; x < 1; x++) {
+				let rock = document.createElement('div');
+				rock.setAttribute('class', 'garbag_1');
+				rock.y = (x * 600);
+				rock.style.bottom = 100 + "px";
+				gameArea.appendChild(rock);
+			}
+			for (x = 0; x < 1; x++) {
+				let rock = document.createElement('div');
+				rock.setAttribute('class', 'garbag_2');
+				rock.y = (x * 600);
+				rock.style.bottom = 100 + "px";
+
+
+				gameArea.appendChild(rock);
+			}
+			for (x = 0; x < 1; x++) {
+				let rock = document.createElement('div');
+				rock.setAttribute('class', 'garbag_3');
+				rock.y = (x * 600);
+				rock.style.bottom = 100 + "px";
+				gameArea.appendChild(rock);
+			}
+			for (x = 0; x < 2; x++) {
+				let rock = document.createElement('div');
+				rock.setAttribute('class', 'garbag_4');
+				rock.y = (x * 600);
+				rock.style.bottom = 100 + "px";
+				gameArea.appendChild(rock);
+			}
+
+			for (x = 0; x < 1; x++) {
+				let rock = document.createElement('div');
+				rock.setAttribute('class', 'garbag_5');
+				rock.y = (x * 600);
+				rock.style.bottom = 10 + "px";
+				rock.style.left = Math.floor(Math.random() * 1200) + 'px'
+				gameArea.appendChild(rock);
+
+
+			}
+
+			for (x = 0; x < 1; x++) {
+				let rock = document.createElement('div');
+				rock.setAttribute('class', 'garbag_6');
+				rock.y = (x * 600);
+				rock.style.bottom = 10 + "px";
+				rock.style.left = Math.floor(Math.random() * 1200) + 'px'
+				gameArea.appendChild(rock);
+
+
+			}
+
+		}
+	</script>
+</body>
+
+</html>
